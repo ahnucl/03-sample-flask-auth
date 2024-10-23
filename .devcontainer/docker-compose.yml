@@ -1,0 +1,10 @@
+services:
+  app:
+    container_name: rs-02-flask
+    build:
+      dockerfile: .devcontainer/Dockerfile
+      context: ..
+    volumes:
+      - ..:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

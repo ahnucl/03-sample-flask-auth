@@ -1,0 +1,45 @@
+{
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/app",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ahmadalli.vscode-nginx-conf",
+                "donjayamanne.python-extension-pack",
+                // "drcika.apc-extension",
+                "ecmel.vscode-html-css",
+                "editorconfig.editorconfig",
+                // "github.github-vscode-theme",
+                // "humao.rest-client",
+                "mgesbert.python-path",
+                // "miguelsolorio.min-theme",
+                // "miguelsolorio.symbols",
+                // "mkloubert.vscode-http-client",
+                "ms-azuretools.vscode-docker",
+                "ms-ceintl.vscode-language-pack-pt-br",
+                "ms-python.black-formatter",
+                "ms-python.debugpy",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-vscode-remote.remote-containers",
+                "ms-vscode-remote.remote-ssh",
+                "ms-vscode-remote.remote-ssh-edit",
+                // "ms-vscode-remote.remote-wsl",
+                "ms-vscode-remote.vscode-remote-extensionpack",
+                "ms-vscode.remote-explorer",
+                "ms-vscode.remote-server",
+                "njpwerner.autodocstring",
+                "shd101wyy.markdown-preview-enhanced",
+                "tamasfe.even-better-toml",
+                "tomoki1207.selectline-statusbar",
+                // "visualstudioexptteam.intellicode-api-usage-examples",
+                // "visualstudioexptteam.vscodeintellicode"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        }
+    }
+}
