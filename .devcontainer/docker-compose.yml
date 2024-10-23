@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: rs-02-flask
+    container_name: rs-03-sample-flask-auth
     build:
       dockerfile: .devcontainer/Dockerfile
       context: ..
