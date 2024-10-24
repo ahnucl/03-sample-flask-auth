@@ -35,7 +35,8 @@
                 "tamasfe.even-better-toml",
                 "tomoki1207.selectline-statusbar",
                 // "visualstudioexptteam.intellicode-api-usage-examples",
-                // "visualstudioexptteam.vscodeintellicode"
+                // "visualstudioexptteam.vscodeintellicode",
+                "qwtel.sqlite-viewer"
             ],
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "bash"
