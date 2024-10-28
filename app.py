@@ -43,11 +43,6 @@ def login():
     return jsonify({"message": "Autenticação realizada com sucesso"})
 
 
-@app.route('/sign-up', methods=["POST"])
-def sign_up():
-    return 'TODO'
-    
-
 @app.route("/hello-world", methods=["GET"])
 def hello_world():
     return "Hello world"
