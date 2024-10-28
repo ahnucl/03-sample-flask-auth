@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from models.user import User
 from database import db
-from flask_login import LoginManager, login_user, current_user
+from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 
 
 app = Flask(__name__)
@@ -18,6 +18,13 @@ db.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+
+
+@app.route('/logout', methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    return jsonify({"message": "Logout realizado com sucesso!"})
 
 
 @app.route('/login', methods=['POST'])
@@ -41,6 +48,27 @@ def login():
     print(current_user.is_authenticated)
     
     return jsonify({"message": "Autenticação realizada com sucesso"})
+
+
+@app.route('/users', methods=['POST'])
+def create_user():
+    data = request.json
+    if not data:
+        return jsonify({"message": "Dados inválidos"}), 400
+    
+    username = data.get("username")
+    password = data.get("password")
+
+    if not username or not password:
+        return jsonify({"message": "Dados inválidos"}), 400
+    
+    user = User(username=username, password=password) # type: ignore
+    db.session.add(user)
+    db.session.commit()
+
+    
+    return jsonify({"message": "Usuário cadastrado com sucesso"}), 200
+    
 
 
 @app.route("/hello-world", methods=["GET"])
