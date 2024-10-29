@@ -70,6 +70,52 @@ def create_user():
     return jsonify({"message": "Usuário cadastrado com sucesso"}), 200
     
 
+@app.route('/users/<int:user_id>', methods=['GET'])
+@login_required
+def read_user(user_id):
+    user = User.query.get(user_id)
+    
+    if not user:
+        return jsonify({"message": "Usuário não encontrado"}), 404
+    
+    
+    return jsonify({"username": user.username})
+
+
+@app.route('/users/<int:user_id>', methods=['PUT'])
+@login_required
+def update_user(user_id):
+    user = User.query.get(user_id)
+    
+    if not user:
+        return jsonify({"message": "Usuário não encontrado"}), 404
+    
+    data = request.json
+    if not data:
+        return jsonify({"message": "Dados inválidos"}), 400
+    
+    user.password = data.get("password")
+    db.session.commit()
+    
+    return jsonify({"message": f"Usuário {user_id} atualizado com sucesso"})
+
+
+@app.route('/users/<int:user_id>', methods=['DELETE'])
+@login_required
+def delete_user(user_id):
+    if user_id == current_user.id:
+        return jsonify({"message": "Não é possível deletar o usuário logado"}), 403
+    
+    user = User.query.get(user_id)
+    
+    if not user:
+        return jsonify({"message": "Usuário não encontrado"}), 404
+    
+    db.session.delete(user)
+    db.session.commit()
+    
+    return jsonify({"message": f"Usuário {user_id} deletado com sucesso"})
+
 
 @app.route("/hello-world", methods=["GET"])
 def hello_world():
