@@ -6,7 +6,7 @@ from flask_login import LoginManager, login_required, login_user, current_user, 
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "my_secret_key"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:admin123@host.docker.internal:3306/flask-crud"
 
 login_manager = LoginManager()
 login_manager.login_view = 'login' # type: ignore
