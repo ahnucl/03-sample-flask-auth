@@ -62,10 +62,9 @@ def create_user():
     if not username or not password:
         return jsonify({"message": "Dados inválidos"}), 400
 
-    user = User(username=username, password=password) # type: ignore
+    user = User(username=username, password=password, role='user') # type: ignore
     db.session.add(user)
     db.session.commit()
-
 
     return jsonify({"message": "Usuário cadastrado com sucesso"}), 200
 
@@ -90,6 +89,9 @@ def update_user(user_id):
     if not user:
         return jsonify({"message": "Usuário não encontrado"}), 404
 
+    if user_id != current_user.id and current_user.role != 'admin':
+        return jsonify({"message": "Operação não permitida"}), 403
+
     data = request.json
     if not data:
         return jsonify({"message": "Dados inválidos"}), 400
@@ -107,6 +109,9 @@ def delete_user(user_id):
         return jsonify({"message": "Não é possível deletar o usuário logado"}), 403
 
     user = User.query.get(user_id)
+
+    if current_user.role != 'admin':
+        return jsonify({"message": "Operação não permitida"}), 403
 
     if not user:
         return jsonify({"message": "Usuário não encontrado"}), 404
